@@ -106,15 +106,8 @@ public class BillView {
                     System.out.println("Nhập mã id chọn Bill: ");
                     int billId = checkId();
                     int billIndex = manageBill.findById(billId);
-                    if (room.isStatus()) {
-                        room.setStatus(false);
-                        manageBill.addRoomToBill(billIndex, room);
+                    manageBill.addRoomToBill(billIndex, room);
                     }
-                    else {
-                            System.err.println("Khách sạn đã hết phòng hoặc bạn đang tranh phòng người ta :)))");
-                        }
-                    readAndWrite.writeToFile("Bill.txt",billList);
-                }
             System.out.println("Enter any Key to continue create - Enter QUIT to back MENU: ");
             String back = scanner.next();
             if (back.equalsIgnoreCase("quit")) {

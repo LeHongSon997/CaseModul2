@@ -53,8 +53,15 @@ public class ManageBill implements IManage{
     }
 
     public void addRoomToBill(int index, Room room) throws IOException {
-        Bill bill = billList.get(index);
+        if (room.isStatus()) {
+            room.setStatus(false);
+            Bill bill = billList.get(index);
             bill.setRoom(room);
             billList.set(index, bill);
+        }
+        else {
+                System.err.println("Khách sạn đã hết phòng hoặc bạn đang tranh phòng người ta :)))");
+        }
+            readAndWriteFile.writeToFile(PATH_BILL,billList);
     }
 }
