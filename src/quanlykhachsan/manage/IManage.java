@@ -1,4 +1,4 @@
-package quanlykhachsan.sevice;
+package quanlykhachsan.manage;
 
 import java.io.IOException;
 import java.util.List;
@@ -10,6 +10,6 @@ public interface IManage<T> {
 
     void edit(int id, T bill) throws IOException;
 
-    void delete(int id);
+    void delete(int index) throws IOException;
 
 }

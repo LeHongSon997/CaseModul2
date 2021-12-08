@@ -1,6 +1,8 @@
 package quanlykhachsan.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Bill implements Serializable {
     private int id;
@@ -8,8 +10,10 @@ public class Bill implements Serializable {
     private String renterName;
     private String tenantsName;
     private int numberOfRental;
-    private int sumMoney;
+    private int sumMoney = 0;
+    private boolean status = true;
     private Room room;
+    private List<Service> service = new ArrayList<>();
 
     public Bill() {
     }
@@ -22,13 +26,21 @@ public class Bill implements Serializable {
         this.id = id;
     }
 
-    public Bill(int id, String billName, String renterName, String tenantsName, int numberOfRental , int sumMoney) {
+    public Bill(int id, String billName, String renterName, String tenantsName, int numberOfRental,int sumMoney) {
         this.id = id;
         this.billName = billName;
         this.renterName = renterName;
         this.tenantsName = tenantsName;
         this.numberOfRental = numberOfRental;
         this.sumMoney = sumMoney;
+    }
+
+    public List<Service> getService() {
+        return service;
+    }
+
+    public void setService(List<Service> service) {
+        this.service = service;
     }
 
     public Room getRoom() {
@@ -79,6 +91,14 @@ public class Bill implements Serializable {
         this.sumMoney = sumMoney;
     }
 
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         return "Bill{" +
@@ -88,7 +108,9 @@ public class Bill implements Serializable {
                 ", tenantsName='" + tenantsName + '\'' +
                 ", numberOfRental=" + numberOfRental +
                 ", sumMoney=" + sumMoney +
-                ", room : " + room
+                ", status=" + status +
+                ", room : " + room +
+                ", service : " + service
                 ;
     }
 }

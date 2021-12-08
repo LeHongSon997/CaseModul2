@@ -1,11 +1,10 @@
-package quanlykhachsan.sevice;
+package quanlykhachsan.manage;
 
 import quanlykhachsan.config.ReadAndWrite;
 import quanlykhachsan.model.User;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Scanner;
 
 public class ManageUser implements IManage{
     public String PATH_ROOM = "C:\\Users\\a\\IdeaProjects\\CaseModul2\\src\\quanlykhachsan\\file\\User.txt";
@@ -25,27 +24,33 @@ public class ManageUser implements IManage{
     }
 
     @Override
-    public void edit(int id, Object bill) throws IOException {
-        users.set(id, (User) bill);
+    public void edit(int id, Object user) throws IOException {
+        int index = findById(id);
+        if (index != -1) {
+            users.set(index, (User) user);
+        } else {
+            System.out.println("Không tồn tại mã này!");
+        }
         readAndWriteFile.writeToFile(PATH_ROOM,users);
     }
 
     @Override
-    public void delete(int id) {
-        users.remove(id);
+    public void delete(int id) throws IOException {
+        int index = findById(id);
+        if (index != -1) {
+            users.remove(index);
+        } else {
+            System.out.println("Không tồn tại mã này!");
+        }
+        readAndWriteFile.writeToFile(PATH_ROOM,users);
     }
 
-    public int findById() {
-        Scanner s = new Scanner(System.in);
-        System.out.println("Nhập id muốn tìm: ");
-        int id = s.nextInt();
-        int index = -1;
+    public int findById(int id) {
         for (int i = 0; i < users.size(); i++) {
             if (users.get(i).getId() == id) {
-                index = i;
-                break;
+                return i;
             }
         }
-        return index;
+        return -1;
     }
 }
